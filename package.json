@@ -1,0 +1,31 @@
+{
+  "name": "contactmanager",
+  "version": "1.0.0",
+  "description": "A contact manager web app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/freddyflo/AddressBook.git"
+  },
+  "keywords": [
+    "angular",
+    "css",
+    "bootstrap",
+    "html5"
+  ],
+  "author": "fred aklamanu <fred.aklamanu@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/freddyflo/AddressBook/issues"
+  },
+  "homepage": "https://github.com/freddyflo/AddressBook#readme",
+  "dependencies": {
+    "angular": "^1.5.8",
+    "bootstrap": "^3.3.7",
+    "font-awesome": "^4.6.3",
+    "jquery": "^3.1.0"
+  }
+}
