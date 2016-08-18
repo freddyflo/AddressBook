@@ -1,9 +1,13 @@
 'use strict';
-angular.module('contactManager', []).controller('AppCtl', ['$scope', function($scope) {
-     $scope.clickHandler = function () {
+angular.module('contactManager', [])
+
+    .controller('AppCtl', ['$scope', 'jsonFilter',  function($scope, jsonFilter) {
+    
+        $scope.clickHandler = function () {
         $scope.isHidden = !$scope.isHidden;
        // window.alert('Clicked!');
  }; 
+   
     $scope.contacts = [
         {
             name: 'John Doe',
@@ -26,4 +30,15 @@ angular.module('contactManager', []).controller('AppCtl', ['$scope', function($s
             fontWeight: 'bold'
         };
     };
-    }]);
+    
+     console.log(jsonFilter($scope.contacts));
+    
+    }])
+
+    .filter('truncate', function() {
+        return function(input, limit) {
+            return( input.length > limit ) ? input.substr(0, limit) + "..." : input;
+        };
+            
+        });
+
