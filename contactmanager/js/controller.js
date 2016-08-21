@@ -1,5 +1,5 @@
 'use strict';
-angular.module('contactManager', [])
+angular.module('contactManager', ['ngRoute'])
 
     .controller('AppCtl', ['$scope', 'jsonFilter',  function($scope, jsonFilter) {
     
@@ -35,10 +35,47 @@ angular.module('contactManager', [])
     
     }])
 
+    // customer filter
     .filter('truncate', function() {
         return function(input, limit) {
             return( input.length > limit ) ? input.substr(0, limit) + "..." : input;
         };
             
-        });
+        })
+    // configuring routes
+    .config(function($routeProvider){
+        $routeProvider.when('/', {
+            controller: 'indexCtl',
+            templateUrl: 'contactmanager/partials/index.html'
+        })
+        .when('/add-contact', {
+           controller: 'addCtl',
+           templateUrl: 'contactmanager/partials/add.html'    
+        })
+         .when('contact/: id', {
+           controller: 'contactCtl',
+           templateUrl: 'contactmanager/partials/contact.html'    
+        })
+        .otherwise({
+            redirectTo: '/'
+        })
+    
+      //  $locationProvider.html5Mode(true);
+    
+    })
+
+    // another controller for index page
+    .controller('indexCtl', function($scope) {
+        
+    })
+    
+    // controller for add contact page
+    .controller('addCtl', function($scope){
+    
+    })
+    // controller for contact
+   .controller('contactCtl', function($scope, $routeParams){
+        console.log($routeParams);
+    });
+
 
