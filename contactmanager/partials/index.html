@@ -48,17 +48,15 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>Karan Bromwich</td>
-            <td>karan@example.com</td>
-            <td>01234 56734</td>
-            <td><a class="btn btn-default btn-xs" href="#">View</a></td>
-        </tr>
-        <tr>
-            <td>Declan Proud</td>
-            <td>declan@example.com</td>
-            <td>01234 567890</td>
-           <td><a class="btn btn-default btn-xs" href="#">View</a></td>
+        <tr ng-repeat="contact in contacts | filter:search">
+            <td>{{contact.name}}</td>
+            <td>{{contact.email}}</td>
+            <td>{{contact.phone}}</td>
+            <td>
+                <a href="#/contact/{{$index}}" class="btn btn-default btn-xs">View</a>
+                <button class="btn btn-danger btn-xs" ng-click="delete($index)">Delete</button>
+            </td>
+            
         </tr>
 </tbody>
 </table>

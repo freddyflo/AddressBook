@@ -19,12 +19,12 @@
         </div>
         <div class="collapse navbar-collapse" id="nav-toggle">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#/index">Browse</a></li>
-                    <li><a href="#/add-contact">Add Contact</a></li>
+                    <li ng-class="pageClass('/')"><a href="#/index">Browse</a></li>
+                    <li ng-class="pageClass('/add-contact')"><a href="#/add-contact">Add Contact</a></li>
                     
                 </ul>
            <form class="navbar-form navbar-right" role="search">
-               <input type="text" class="form-control" placeholder="Search">
+               <input type="text" class="form-control" placeholder="Search" ng-model="search.name" ng-keyup="startSearch()">
            </form>
         </div>
     </nav>
@@ -36,9 +36,11 @@
     
     <!-- Load js scripts -->
 <script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
-    <script type="text/javascript" src="node_modules/angular-route/angular-route.min.js"></script>
+<script type="text/javascript" src="node_modules/angular-route/angular-route.min.js"></script>
+<script type="text/javascript" src="node_modules/angular-sanitize/angular-sanitize.min.js"></script> 
 <script type="text/javascript" src="contactmanager/js/controller.js"></script>
 <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
 <script type="text/javascript" src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    
 </body>
 </html>

@@ -34,7 +34,8 @@
       <ng-view></ng-view>
     </div>  <!-- end of container -->
        <div class="page-header row">
-            <h1><img src="http://placehold.it/50x50" class="img-circle">Declan Proud</h1>
+           <!-- <h1><img src="http://placehold.it/50x50" class="img-circle"> {{contact.name}}</h1> -->
+            <h1><div gravatar email="{{contact.email}}" size="50" class="img-circle"></div> {{contact.name}}</h1>
        </div>
         <form class="form-horizontal">
         <div class="row">
@@ -42,19 +43,19 @@
                  <div class="form-group">
                     <label for="name" class="col-sm-4 control-label">Name</label>
                      <div class="col-sm-8">
-                       <p class="form-control-static">Declan Proud</p>
+                       <p class="form-control-static" editable="contact.name" field-type="name"></p>
                     </div>
                 </div>
                  <div class="form-group">
                     <label for="phone" class="col-sm-4 control-label">Phone Number</label>
                      <div class="col-sm-8">
-                        <p class="form-control-static">01234567890</p>
+                       <p class="form-control-static" editable="contact.phone" field-type="phone"></p>
                     </div>
                 </div>
                  <div class="form-group">
                     <label for="address" class="col-sm-4 control-label">Adresss</label>
                      <div class="col-sm-8">
-                        <p class="form-control-static">123, Some Street Leicester LE1 2AB United Kingdom</p>
+                        <p class="form-control-static" editable="contact.address" field-type="address"></p>
                     </div>
                 </div>
             </div>
@@ -62,24 +63,25 @@
                  <div class="form-group">
                     <label for="email" class="col-sm-4 control-label">Email</label>
                      <div class="col-sm-8">
-                         <p class="form-control-static">declan@example.com</p>
+                           <p class="form-control-static" editable="contact.email" field-type="email"></p>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="website" class="col-sm-4 control-label">Website</label>
                     <div class="col-sm-8">
-                        <p class="form-control-static">http://declan.com</p>
+                         <p class="form-control-static" editable="contact.website" field-type="website"></p>
                     </div>    
                 </div>
                 <div class="form-group">
                     <label for="notes" class="col-sm-4 control-label">Notes</label>
                     <div class="col-sm-8">
-                        <textarea id="notes" class="form-control">Here are some notes about this contact.</textarea>
+                        <textarea id="notes" class="form-control">{{contact.notes}}</textarea>
                          <span class="help-block">Any additional information about the contact.</span>
                      </div>  
                 </div>
             </div>
         </div>
+            
     
         
        
