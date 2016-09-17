@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="contactManager" ng-controller="AppCtl">
+<head>
+<meta charset="utf-8">
+<title>Contacts Manager</title>
+<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+</head>
+    
+<body>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nav-toggle">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button> 
+        <a class="navbar-brand" href="/">Contacts Manager</a>
+        </div>
+        <div class="collapse navbar-collapse" id="nav-toggle">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="/">Browse</a></li>
+                    <li><a href="/add">Add Contact</a></li>
+                </ul>
+           <form class="navbar-form navbar-right" role="search">
+               <input type="text" class="form-control" placeholder="Search">
+           </form>
+        </div>
+    </nav>
+    
+    <!-- container -->
+    <div class="container">
+        <ng-view></ng-view>
+        <div class="row">
+            <div class="col-sm-8">
+                <button ng-click="clickHandler()">Click Me</button>
+                <div ng-if="isHidden">
+                    <h2>Click the button above to toggle.</h2>
+                </div>
+                <div class="row">
+                    <input type="text" ng-model="search">
+                    <div class="col-sm-6">
+                        {{'Lorem ipsum dolor sit amet' | truncate:15}} <br>
+                        {{'aklamanu' | truncate:15}}
+                        <ul>
+                            <li ng-repeat="contact in contacts | filter:search | orderBy:'name'">
+                                    {{contact.name}} - {{contact.phone}}
+                           </li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-6">
+                        <p ng-class="{'text-center': center, 'text-danger': error}">
+                            Lorem ipsum dolor sit amet
+                        </p>
+                        <p ng-style="styleDemo()">
+                             Lorem ipsum dolor sit amet
+                        </p>
+                        <label><input type="checkbox" ng-model="center"> text-center</label>
+                        <label><input type="checkbox" ng-model="error"> text-danger</label>
+                        <label><input type="checkbox" ng-model="styler"> ng-styler</label>
+                    </div>
+            <div class="col-sm-4" col-sm-offset-1>
+                Here is our sidebar{{ 12345.225 | number: 2}} <br>
+                    {{'FRED' | lowercase}} <br>
+                    {{'aklamanu' | uppercase}} <br>
+                    {{ 755508723000 | date:"h 'o''clock'"}}
+                
+            </div>
+                </div>
+        </div>
+        </div>
+    </div>  <!-- end of container -->
+    
+    <!-- Load js scripts -->
+<script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
+    <script type="text/javascript" src="node_modules/angular-route/angular-route.min.js"></script>
+<script type="text/javascript" src="contactmanager/js/controller.js"></script>
+<script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
