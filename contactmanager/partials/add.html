@@ -34,12 +34,10 @@
       <ng-view></ng-view>
     </div>  <!-- end of container -->
        <div class="page-header">
-        <h1>All Contacts</h1>
+        <h1>All Contacts</h1>  
     </div>
-    <form class="form-horizontal" ng-submit="submit()">
-        <div class="alert alert-success" ng-show="added">
-                The contact was added successfully.
-        </div>
+    <form class="form-horizontal">
+        <div id="alertContainer"></div>
         <div class="row">
             <div class="col-sm-6">
                  <div class="form-group">
@@ -77,15 +75,19 @@
                 <div class="form-group">
                     <label for="notes" class="col-sm-4 control-label">Notes</label>
                     <div class="col-sm-8">
-                        <textarea id="notes" class="form-control" ng-model="contact.notes"></textarea>
-                         <span class="help-block">Any additional information about the contact.</span>
+                        <textarea id="notes" class="form-control" ng-model="contact.notes"
+                                  bs-tooltip data-title="Any additional information about the contact."
+                                  data-trigger="focus" data-placement="bottom">
+                        </textarea>
+                         
                      </div>  
                 </div>
             </div>
         </div>
            <div class="form-group well">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <input type="submit" class="btn btn-primary" value="Add Contact">
+                 <!--   <input type="submit" class="btn btn-primary" value="Add Contact"> -->
+                    <button class="btn btn-primary" ng-click="submit()">Add contact</button>
                 </div>
           </div>
     </form>
@@ -95,7 +97,7 @@
     
     <!-- Load js scripts -->
 <script type="text/javascript" src="../../node_modules/angular/angular.min.js"></script>
-    <script type="text/javascript" src="../../node_modules/angular-route/angular-route.min.js"></script>
+<script type="text/javascript" src="../../node_modules/angular-route/angular-route.min.js"></script>
 <script type="text/javascript" src="../../contactmanager/js/controller.js"></script>
 <script type="text/javascript" src="../../node_modules/jquery/dist/jquery.min.js"></script>
 <script type="text/javascript" src="../../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>

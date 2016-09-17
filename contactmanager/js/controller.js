@@ -1,5 +1,6 @@
 'use strict';
-angular.module('contactManager', ['ngRoute','ngSanitize'])
+
+angular.module('contactManager', ['ngRoute','ngSanitize','mgcrea.ngStrap'])
 
     .controller('AppCtl', function($scope, $location) {
            
@@ -11,7 +12,7 @@ angular.module('contactManager', ['ngRoute','ngSanitize'])
         $scope.pageClass = function(path) {
             return ( path == $location.path() ) ? 'active' : '';  
         };
-
+        
            
  })
     // configuring routes
@@ -37,28 +38,67 @@ angular.module('contactManager', ['ngRoute','ngSanitize'])
     })
 
     // another controller for index page
-    .controller('indexCtl', function($scope, contacts) {
+    .controller('indexCtl', function($scope, contacts, $alert) {
         
        $scope.contacts = contacts.get();
     
-       $scope.delete = function (index) {
-           contacts.destroy(index);
-       } 
+//       $scope.delete = function (index) {
+//           contacts.destroy(index);
+//       }
+           
+         
+        
+   var deletionAlert = $alert({
+       title: 'Success!',
+       content: 'The contact was deleted successfully.',
+       type: 'success',
+       container: '#alertContainer',
+       show: false
+   });
+    
+    
+    
+    $scope.delete = function(index){
+    contacts.destroy(index);
+    deletionAlert.show();
+    };  
+    
+    
+       
     })
     
     // controller for add contact page
-    .controller('addCtl', function($scope, contacts){
-        $scope.submit = function() {
-            $scope.contacts = contacts.get();
-            contacts.create($scope.contact);
-            $scope.contact = null;
-            $scope.added = true;
-        }
+    .controller('addCtl', function($scope, contacts, $alert){
+//        $scope.submit = function() {
+//            $scope.contacts = contacts.get();
+//            contacts.create($scope.contact);
+//            $scope.contact = null;
+//            $scope.added = true;
+//        }
+        
+         $scope.contacts = contacts.get();
+    
+         var alert = $alert({
+          title: 'Success!',
+          content: 'The contact was added successfully.',
+          type: 'success',
+          container: '#alertContainer',
+          show: false
+      });    
+    
+        $scope.submit = function(){
+        contacts.create($scope.contact);
+        $scope.contact = null;
+        alert.show();
+        console.log("In add function");
+        
+        };
     })
     // controller for contact
    .controller('contactCtl', function($scope, $routeParams, contacts){
         $scope.contact = contacts.find($routeParams.id);
     })
+    
     
     // custom service; value, service & faactory
     .factory('contacts', function() {
@@ -149,6 +189,21 @@ angular.module('contactManager', ['ngRoute','ngSanitize'])
         }
     };
 })
+
+.controller('demoCtl', function($scope, $alert){
+    var alert = $alert({
+        title: 'Alert Title!',
+        content: 'Here\'s some content.',
+        type: 'danger',
+        container: '#alertContainer',
+        show: false
+    });
+    
+    $scope.showAlert = alert.show;
+});
+
+
+
 
 
 

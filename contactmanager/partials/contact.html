@@ -75,7 +75,8 @@
                 <div class="form-group">
                     <label for="notes" class="col-sm-4 control-label">Notes</label>
                     <div class="col-sm-8">
-                        <textarea id="notes" class="form-control">{{contact.notes}}</textarea>
+                        <textarea id="notes" class="form-control" ng-model="contact.notes"
+                                  bs-tooltip data-title="">{{contact.notes}}</textarea>
                          <span class="help-block">Any additional information about the contact.</span>
                      </div>  
                 </div>
