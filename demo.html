@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="contactManager" ng-controller="demoCtl">
+<head>
+<meta charset="utf-8">
+<!-- <base href="/">  solves error with $locationProvider in controller.js -->
+<title>Contacts Manager</title>
+<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="node_modules/angular-motion/dist/angular-motion.min.css">
+</head>
+    
+<body>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nav-toggle">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button> 
+        <a class="navbar-brand" href="/">Contacts Manager</a>
+        </div>
+        <div class="collapse navbar-collapse" id="nav-toggle">
+                <ul class="nav navbar-nav">
+                    <li ng-class="pageClass('/')"><a href="#/index">Browse</a></li>
+                    <li ng-class="pageClass('/add-contact')"><a href="#/add-contact">Add Contact</a></li>
+                    
+                </ul>
+           <form class="navbar-form navbar-right" role="search">
+               <input type="text" class="form-control" placeholder="Search" ng-model="search.name" ng-keyup="startSearch()">
+           </form>
+        </div>
+    </nav>
+   
+    
+    <!-- container -->
+    <div class="container">
+      <ng-view></ng-view>
+    </div> 
+    <div class="container">
+        <button class="btn btn-primary" bs-modal="modal" data-animation="am-fade-and-scale">Show Modal</button>
+        <button class="btn btn-link" bs-tooltip="tooltip" data-trigger="click">what's this?</button>
+        <input type="text" bs-tooltip="tooltip" data-trigger="focus" data-placement="bottom">
+        <button class="btn btn-primary" bs-popover="popover" data-placement="bottom">Show Popover</button>
+        <button class="btn btn-primary" ng-click="showAlert()">Alert via Service</button>
+    <div id="alertContainer">
+    </div>
+    </div>
+    
+     
+    <!-- end of container -->
+    
+    
+    <!-- Load js scripts -->
+<script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
+<script type="text/javascript" src="node_modules/angular-strap/dist/angular-strap.min.js"></script>
+<script type="text/javascript" src="node_modules/angular-strap/dist/angular-strap.tpl.js"></script>
+<script type="text/javascript" src="node_modules/angular-animate/angular-animate.min.js"></script>
+<script type="text/javascript" src="node_modules/angular-route/angular-route.min.js"></script>
+<script type="text/javascript" src="node_modules/angular-sanitize/angular-sanitize.min.js"></script> 
+<script type="text/javascript" src="contactmanager/js/controller.js"></script>
+<script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    
+</body>
+</html>
