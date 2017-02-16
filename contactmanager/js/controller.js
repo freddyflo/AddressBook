@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('contactManager', ['ngRoute','ngSanitize','mgcrea.ngStrap'])
+angular.module('contactManager', ['ngRoute','ngSanitize','mgcrea.ngStrap', 'ngResource'])
 
     .controller('AppCtl', function($scope, $location) {
            
@@ -40,8 +40,15 @@ angular.module('contactManager', ['ngRoute','ngSanitize','mgcrea.ngStrap'])
     // another controller for index page
     .controller('indexCtl', function($scope, contacts, $alert) {
         
-       $scope.contacts = contacts.get();
-    
+           $scope.contacts = contacts.get();
+       //  $scope.contacts =
+//         $http.get('http://127.0.0.1:8000').success( function(data) {
+//             $scope.contacts = data;
+//         })
+//         .error(function(){
+//             window.alert('There was an error!');
+//         });
+//    
 //       $scope.delete = function (index) {
 //           contacts.destroy(index);
 //       }
@@ -100,31 +107,37 @@ angular.module('contactManager', ['ngRoute','ngSanitize','mgcrea.ngStrap'])
     })
     
     
-    // custom service; value, service & faactory
-    .factory('contacts', function() {
-        var contacts = [
-             {
-              name: 'Stephen Radford',
-              phone: '0123456789',
-              address: '123, Some Street\nLeicester\nLE1 2AB',
-              email: 'stephen@email.com',
-              website: 'stephenradford.me',
-              notes: ''
-            },
-            {
-              name: 'Declan Proud',
-              phone: '987654321',
-              address: '234, Some Street\nLeicester\nLE1 2AB',
-              email: 'declan@email.com',
-              website: 'declanproud.me',
-              notes: 'Some notes about the contact.'
-            }
-        ];
+    // custom service; value, service & factory
+    .factory('contacts', function ContactFactory($resource) {
+    
+         var Resource = $resource('http://localhost:8000/:id', {id: '@id'}, { update: { method: 'PUT'} });
         
+        // console.log(Resource);
+//        
+//        var contacts = [
+//             {
+//              name: 'Stephen Radford',
+//              phone: '0123456789',
+//              address: '123, Some Street\nLeicester\nLE1 2AB',
+//              email: 'stephen@email.com',
+//              website: 'stephenradford.me',
+//              notes: ''
+//            },
+//            {
+//              name: 'Declan Proud',
+//              phone: '987654321',
+//              address: '234, Some Street\nLeicester\nLE1 2AB',
+//              email: 'declan@email.com',
+//              website: 'declanproud.me',
+//              notes: 'Some notes about the contact.'
+//            }
+//        ];
+//        
        
         return {
             get: function() {
-                return contacts;
+               // return contacts;
+                return Resource.query();
             },
             find: function(index) {
                 return contacts[index];
@@ -204,7 +217,7 @@ angular.module('contactManager', ['ngRoute','ngSanitize','mgcrea.ngStrap'])
 
 
 
-
+// python -m SimpleHTTPServer [port]
 
 
 
