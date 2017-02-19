@@ -1,0 +1,18 @@
+{
+  "contacts": [
+    {
+      "name": "Kofi Mensah",
+      "phone": "123456",
+      "address": "55th Tesano Street",
+      "email": "kofi.mensah@gmail.com",
+      "id": 1
+    },
+    {
+      "name": "Adwoa Amankwah",
+      "phone": "789456",
+      "address": "21st Kwame Nkrumah Circle",
+      "email": "adwoa.amankwah@hotmail.com",
+      "id": 2
+    }
+  ]
+}
