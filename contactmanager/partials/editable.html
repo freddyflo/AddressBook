@@ -4,11 +4,10 @@
 
 <div ng-show="editor.showing">
 <div ng-if="field == 'textarea'">
-    <textarea ng-model="editor.value" class="formcontrol"></textarea>
+    <textarea ng-model="editor.value" class="form-control"></textarea>
 </div>
-    <div ng-if="field != 'textarea'">
-        <input type="{{field}}" ng-model="editor.value" class="formcontrol">
-
+<div ng-if="field != 'textarea'">
+    <input type="{{field}}" ng-model="editor.value" class="form-control">
 </div>
 <hr>
 <button class="btn btn-success btn-xs" ng-click="save()">Save</button>

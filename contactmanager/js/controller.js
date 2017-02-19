@@ -38,9 +38,10 @@ angular.module('contactManager', ['ngRoute','ngSanitize','mgcrea.ngStrap', 'ngRe
     })
 
     // another controller for index page
-    .controller('indexCtl', function($scope, contacts, $alert) {
+    .controller('indexCtl', function($scope, contact, $alert) {
         
-           $scope.contacts = contacts.get();
+           $scope.contacts = contact.get();
+    
        //  $scope.contacts =
 //         $http.get('http://127.0.0.1:8000').success( function(data) {
 //             $scope.contacts = data;
@@ -48,10 +49,8 @@ angular.module('contactManager', ['ngRoute','ngSanitize','mgcrea.ngStrap', 'ngRe
 //         .error(function(){
 //             window.alert('There was an error!');
 //         });
-//    
-//       $scope.delete = function (index) {
-//           contacts.destroy(index);
-//       }
+//          
+//            console.log("contacts: ", $scope.contacts);
            
          
         
@@ -66,7 +65,8 @@ angular.module('contactManager', ['ngRoute','ngSanitize','mgcrea.ngStrap', 'ngRe
     
     
     $scope.delete = function(index){
-    contacts.destroy(index);
+    contact.destroy($scope.contacts[index].id);
+    $scope.contacts.splice(index,1);
     deletionAlert.show();
     };  
     
@@ -75,7 +75,7 @@ angular.module('contactManager', ['ngRoute','ngSanitize','mgcrea.ngStrap', 'ngRe
     })
     
     // controller for add contact page
-    .controller('addCtl', function($scope, contacts, $alert){
+    .controller('addCtl', function($scope, contact, $alert){
 //        $scope.submit = function() {
 //            $scope.contacts = contacts.get();
 //            contacts.create($scope.contact);
@@ -83,7 +83,8 @@ angular.module('contactManager', ['ngRoute','ngSanitize','mgcrea.ngStrap', 'ngRe
 //            $scope.added = true;
 //        }
         
-         $scope.contacts = contacts.get();
+    //     $scope.contacts = contact.get();
+         $scope.contact = contact.create();
     
          var alert = $alert({
           title: 'Success!',
@@ -94,25 +95,33 @@ angular.module('contactManager', ['ngRoute','ngSanitize','mgcrea.ngStrap', 'ngRe
       });    
     
         $scope.submit = function(){
-        contacts.create($scope.contact);
-        $scope.contact = null;
+        $scope.contact.$save();
+        $scope.contact = contact.create();
         alert.show();
         console.log("In add function");
         
         };
     })
+
     // controller for contact
-   .controller('contactCtl', function($scope, $routeParams, contacts){
-        $scope.contact = contacts.find($routeParams.id);
+   .controller('contactCtl', function($scope, $routeParams, contact, $timeout){
+        $scope.contact = contact.find($routeParams.id);
+        $scope.$on('saved',function(){
+            $timeout(function(){
+                $scope.contact.$update();
+            }, 0);
+            
+        });
+       
     })
     
     
     // custom service; value, service & factory
-    .factory('contacts', function ContactFactory($resource) {
+    .factory('contact', function ContactFactory($resource) {
     
-         var Resource = $resource('http://localhost:8000/:id', {id: '@id'}, { update: { method: 'PUT'} });
+         var Resource = $resource('http://localhost:3000/contacts/:id', {id: '@id'}, { update: {method: 'PUT'}});
         
-        // console.log(Resource);
+        
 //        
 //        var contacts = [
 //             {
@@ -139,14 +148,15 @@ angular.module('contactManager', ['ngRoute','ngSanitize','mgcrea.ngStrap', 'ngRe
                // return contacts;
                 return Resource.query();
             },
-            find: function(index) {
-                return contacts[index];
+            find: function(id, success, error) {
+               //  return contacts[index];
+                return Resource.get({id: id}, success, error);
             },
-            create: function(contact) {
-            contacts.push(contact)
+            create: function() {
+            return new Resource();
             },
-            destroy: function(index) {
-                contacts.splice(index, 1);
+            destroy: function(id) {
+                Resource.delete({id: id});
             }    
     };
 })
@@ -198,7 +208,9 @@ angular.module('contactManager', ['ngRoute','ngSanitize','mgcrea.ngStrap', 'ngRe
             $scope.save = function () {
                 $scope.value = $scope.editor.value;
                 $scope.toggleEditor();
-            };
+            }, 
+            
+            $scope.$emit('saved');
         }
     };
 })

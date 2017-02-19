@@ -36,7 +36,7 @@
        <div class="page-header">
         <h1>All Contacts</h1>  
     </div>
-    <form class="form-horizontal">
+    <form class="form-horizontal" ng-submit="submit()">
         <div id="alertContainer"></div>
         <div class="row">
             <div class="col-sm-6">
@@ -87,7 +87,7 @@
            <div class="form-group well">
                 <div class="col-sm-offset-2 col-sm-10">
                  <!--   <input type="submit" class="btn btn-primary" value="Add Contact"> -->
-                    <button class="btn btn-primary" ng-click="submit()">Add contact</button>
+                    <button class="btn btn-primary">Add contact</button>
                 </div>
           </div>
     </form>
