@@ -34,6 +34,10 @@
   },
   "devDependencies": {
     "angular-animate": "^1.5.8",
-    "angular-strap": "^2.2.4"
+    "angular-strap": "^2.2.4",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-uglify": "^2.0.1",
+    "pump": "^1.0.2"
   }
 }
