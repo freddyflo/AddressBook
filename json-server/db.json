@@ -13,6 +13,20 @@
       "address": "21st Kwame Nkrumah Circle",
       "email": "adwoa.amankwah@hotmail.com",
       "id": 2
+    },
+    {
+      "name": "James Brown",
+      "phone": "0789546",
+      "address": "4 rue said villa",
+      "email": "james.brown@telecom-sudparis.eu",
+      "id": 3
+    },
+    {
+      "name": "Frank Aklamanu",
+      "phone": "0209378846",
+      "address": "123 Tesano",
+      "email": "frankjay09@gmail.com",
+      "id": 4
     }
   ]
 }
