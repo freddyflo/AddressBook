@@ -12,8 +12,8 @@ angular.module('contactManager', ['ngRoute','ngSanitize','mgcrea.ngStrap', 'ngRe
         $scope.pageClass = function(path) {
             return ( path == $location.path() ) ? 'active' : '';  
         };
-        
-           
+//        
+//           
  })
     // configuring routes
     .config(function($routeProvider){
@@ -73,9 +73,9 @@ angular.module('contactManager', ['ngRoute','ngSanitize','mgcrea.ngStrap', 'ngRe
     
        
     })
-    
-    // controller for add contact page
-    .controller('addCtl', function($scope, contact, $alert){
+//    
+//    // controller for add contact page
+    .controller('addCtl', function($scope, contact, $alert) {
 //        $scope.submit = function() {
 //            $scope.contacts = contacts.get();
 //            contacts.create($scope.contact);
@@ -102,18 +102,17 @@ angular.module('contactManager', ['ngRoute','ngSanitize','mgcrea.ngStrap', 'ngRe
         
         };
     })
-
-    // controller for contact
-   .controller('contactCtl', function($scope, $routeParams, contact, $timeout){
+//
+//    // controller for contact
+   .controller('contactCtl', ['$scope','$routeParams','contact','$timeout', function($scope, $routeParams, contact, $timeout){
         $scope.contact = contact.find($routeParams.id);
         $scope.$on('saved',function(){
             $timeout(function(){
                 $scope.contact.$update();
             }, 0);
             
-        });
-       
-    })
+        });   
+    }])
     
     
     // custom service; value, service & factory
@@ -160,8 +159,8 @@ angular.module('contactManager', ['ngRoute','ngSanitize','mgcrea.ngStrap', 'ngRe
             }    
     };
 })
-    
-    // custom directive for gravatar
+//    
+//    // custom directive for gravatar
     .directive('gravatar', function() {
         
         return {
@@ -178,8 +177,8 @@ angular.module('contactManager', ['ngRoute','ngSanitize','mgcrea.ngStrap', 'ngRe
         }
     
 })
-
-    // customer filter to convert \n to <br />
+//
+//    // customer filter to convert \n to <br />
     .filter('paragraph', function() {
         return function(input) {
             return (input) ? input.replace(/\n/g, '<br />') : input;
@@ -200,15 +199,15 @@ angular.module('contactManager', ['ngRoute','ngSanitize','mgcrea.ngStrap', 'ngRe
             };
             
             $scope.toggleEditor = function() {
-                $scope.editor.showing = !$scope.editor.showing;
+            $scope.editor.showing = !$scope.editor.showing;   
             };
             
-                $scope.field = ($scope.field) ? $scope.field : 'text';
-                
+             $scope.field = ($scope.field) ? $scope.field : 'text';
+            
             $scope.save = function () {
                 $scope.value = $scope.editor.value;
                 $scope.toggleEditor();
-            }, 
+            },
             
             $scope.$emit('saved');
         }
