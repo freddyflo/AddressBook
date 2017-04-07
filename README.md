@@ -4,6 +4,7 @@ A self-pace study using a book on Learning Web Development using BootStrap and A
 
 ## Technology
 * AngularJS
+* BootStrap
 * JavaScript
 * HTML5
 * CSS3
